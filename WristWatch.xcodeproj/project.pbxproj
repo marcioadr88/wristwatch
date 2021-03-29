@@ -191,6 +191,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0ACCF8E126126E7700B971AB /* Build configuration list for PBXNativeTarget "WristWatch" */;
 			buildPhases = (
+				0ACCF92526129A8B00B971AB /* SwiftLint */,
 				0ACCF8B326126E7500B971AB /* Sources */,
 				0ACCF8B426126E7500B971AB /* Frameworks */,
 				0ACCF8B526126E7500B971AB /* Resources */,
@@ -332,6 +333,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0ACCF92526129A8B00B971AB /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0ACCF8B326126E7500B971AB /* Sources */ = {
