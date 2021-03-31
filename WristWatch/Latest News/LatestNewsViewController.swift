@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SafariServices
 
 private let newsApiClient = NewsAPIClientImpl(baseURL: "https://newsapi.org",
                                               //apiKey: "e2c0bd1a7ce94d39beb67a8e0a086897",
@@ -36,9 +37,9 @@ class LatestNewsViewController: UIViewController, UITableViewDelegate {
     }
     
     private func setupTableView() {
-        let refreshControl = UIRefreshControl()
-        tableView.refreshControl = refreshControl
-
+        setupRefreshControl()
+        
+        // present an alert when on errors
         viewModel
             .error
             .filter { $0 != nil }
@@ -52,7 +53,7 @@ class LatestNewsViewController: UIViewController, UITableViewDelegate {
                     let alertVC = AlertUtils
                         .buildAlertController(title: "Error",
                                               message: errorMessage) { _ in
-                            self.viewModel.clearError()
+                            self.viewModel.clearError() // clear the error
                         }
                     
                     self.present(alertVC, animated: true, completion: nil)
@@ -62,6 +63,42 @@ class LatestNewsViewController: UIViewController, UITableViewDelegate {
             }
             .disposed(by: disposeBag)
         
+        // configure cell
+        viewModel
+            .articles
+            .bind(to: tableView
+                    .rx
+                    .items(cellIdentifier: cellId, cellType: ArticleCell.self)) { (_, article, cell) in
+                cell.article = article
+            }
+            .disposed(by: disposeBag)
+        
+        // handle item selected
+        tableView
+            .rx
+            .modelSelected(Article.self)
+            .subscribe(onNext: { [unowned self] article in
+                if let url = URL(string: article.url) {
+                    let sfSafariVC = SFSafariViewController(url: url)
+                    
+                    self.present(sfSafariVC, animated: true)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        // set tableview delegate
+        tableView.rx.setDelegate(self).disposed(by: disposeBag)
+        
+        // automatic table row height's dimension
+        tableView.rowHeight = UITableView.automaticDimension
+    }
+    
+    func setupRefreshControl() {
+        // setup refresh control
+        let refreshControl = UIRefreshControl()
+        tableView.refreshControl = refreshControl
+        
+        // handle refresh control value changed
         refreshControl
             .rx
             .controlEvent(.valueChanged)
@@ -69,27 +106,18 @@ class LatestNewsViewController: UIViewController, UITableViewDelegate {
                 self.loadArticles(fromScratch: true)
             }).disposed(by: disposeBag)
         
+        // bind refresh control
         viewModel
             .loading
             .bind(to: refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
-        
-        viewModel
-            .articles
-            .bind(to: tableView.rx.items(cellIdentifier: cellId, cellType: ArticleCell.self)) { (_, article, cell) in
-                cell.article = article
-            }
-            .disposed(by: disposeBag)
-        
-        tableView.rx.setDelegate(self).disposed(by: disposeBag)
-        
-        tableView.rowHeight = UITableView.automaticDimension
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
-        
+    
+        // load next page when the user scroll to bottom
         if offsetY > contentHeight - scrollView.frame.height {
             self.loadArticles(fromScratch: false)
         }
