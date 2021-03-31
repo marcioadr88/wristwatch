@@ -18,16 +18,29 @@ class WristWatchTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    func testApi() throws {
+        let expectation = XCTestExpectation(description: "test api")
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        let apiClient = NewsAPIClientImpl(baseURL: "https://newsapi.org",
+                                          apiKey: "e2c0bd1a7ce94d39beb67a8e0a086897",
+                                          version: "v2")
+
+        apiClient.everything(keyword: "watches price") { result in
+            
+            switch result {
+            case .failure(let error):
+                print(error)
+                XCTFail()
+                
+            case .success(let news):
+                print(news)
+                
+            }
+            
+            expectation.fulfill()
         }
+        
+        wait(for: [expectation], timeout: 10)
     }
 
 }
