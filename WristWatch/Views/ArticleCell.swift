@@ -38,7 +38,12 @@ class ArticleCell: UITableViewCell {
             
             titleLabel.text = article.title
             authorLabel.text = article.author
-            dateLabel.text = dateFormatter.string(from: article.publishedAt)
+            
+            if let publishedAt = article.publishedAt {
+                dateLabel.text = dateFormatter.string(from: publishedAt)
+            } else {
+                dateLabel.text = ""
+            }
         }
     }
 }

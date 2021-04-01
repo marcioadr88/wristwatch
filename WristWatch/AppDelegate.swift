@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ]
 
         UINavigationBar.appearance().titleTextAttributes = attrs
+        
+        print("Using realm file \(Realm.Configuration().fileURL!)")
         
         return true
     }

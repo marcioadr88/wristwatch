@@ -21,8 +21,8 @@ enum AppError: Error {
     /// Cannot parse the Post
     case decodingError(cause: Error)
     
-    /// Error querying the DB
-    case databaseQueryError(cause: Error)
+    /// DB Error
+    case databaseError(cause: Error)
     
     /// Api returned an error
     case apiError(message: String)
@@ -40,7 +40,7 @@ extension AppError: LocalizedError {
             return cause.localizedDescription
         case .decodingError(let cause):
             return cause.localizedDescription
-        case .databaseQueryError(let cause):
+        case .databaseError(let cause):
             return cause.localizedDescription
         case .apiError(let message):
             return message

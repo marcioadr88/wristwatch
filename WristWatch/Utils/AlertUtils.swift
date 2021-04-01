@@ -11,7 +11,8 @@ import UIKit
 class AlertUtils {
     
     /// Build a simple alert with title, message and Ok Action
-    static func buildAlertController(title: String, message: String, handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertController {
+    static func buildAlertController(title: String, message: String,
+                                     handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: handler)
         alertController.addAction(action)

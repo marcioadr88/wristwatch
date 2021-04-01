@@ -8,7 +8,8 @@
 import Foundation
 
 protocol NewsAPIClient {
-    func everything(keyword: String?, page: Int, pageSize: Int, handler: @escaping ((Result<News, AppError>) -> Void))
+    func everything(keyword: String?, page: Int, pageSize: Int,
+                    handler: @escaping ((Result<[Article], AppError>) -> Void))
 }
 
 class NewsAPIClientImpl: NewsAPIClient {
@@ -25,7 +26,7 @@ class NewsAPIClientImpl: NewsAPIClient {
     func everything(keyword: String?,
                     page: Int = 1,
                     pageSize: Int = 100,
-                    handler: @escaping ((Result<News, AppError>) -> Void)) {
+                    handler: @escaping ((Result<[Article], AppError>) -> Void)) {
         guard var endpoint = URLComponents(string: baseURL) else {
             handler(.failure(.invalidBaseURL))
             return
@@ -62,7 +63,7 @@ class NewsAPIClientImpl: NewsAPIClient {
             do {
                 // decode the json response
                 let newsResponse = try decoder.decode(News.self, from: data)
-                handler(.success(newsResponse))
+                handler(.success(newsResponse.articles))
             } catch let error {
                 if let newsError = try? decoder.decode(NewsError.self, from: data) {
                     handler(.failure(.apiError(message: newsError.message)))

@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class LatestNewsViewModel {
+class NewsViewModel {
     private let newsRepository: NewsRepository
     
     let articles = BehaviorRelay<[Article]>(value: [])
@@ -29,7 +29,6 @@ class LatestNewsViewModel {
             return
         }
         
-        print("load moar")
         loading.accept(true)
         
         if fromScratch {
@@ -42,7 +41,7 @@ class LatestNewsViewModel {
                     switch result {
                     case .success(let news):
                         var current = fromScratch ? [] : self.articles.value
-                        current.append(contentsOf: news.articles)
+                        current.append(contentsOf: news)
                         
                         self.page += 1
                         self.articles.accept(current)
@@ -54,6 +53,16 @@ class LatestNewsViewModel {
                     loading.accept(false)
                 }
             }
+        }
+    }
+    
+    func delete(article: Article) {
+        do {
+            try newsRepository.delete(article: article)
+        } catch let appError as AppError {
+            self.error.accept(appError)
+        } catch let ex {
+            self.error.accept(AppError.databaseError(cause: ex))
         }
     }
     

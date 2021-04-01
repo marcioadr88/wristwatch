@@ -1,8 +1,8 @@
 //
-//  LatestNewsViewController.swift
+//  LocalNewsViewController.swift
 //  WristWatch
 //
-//  Created by Marcio Duarte on 2021-03-29.
+//  Created by Marcio Duarte on 2021-03-31.
 //
 
 import UIKit
@@ -11,21 +11,19 @@ import RxCocoa
 import SafariServices
 import RealmSwift
 
-private let newsApiClient = NewsAPIClientImpl(baseURL: "https://newsapi.org",
-                                              //apiKey: "e2c0bd1a7ce94d39beb67a8e0a086897",
-                                              apiKey: "2a979b17bb884e61b60fe7e740887ee3",
-                                              version: "v2")
+private let database = RealmDatabase()
 
-private let networkRepository = NetworkRepository(newsApiClient: newsApiClient)
+let localRepository = LocalRepository(database: database)
 
-class LatestNewsViewController: UIViewController, UITableViewDelegate {
-    private let cellId = "articleCell"
+class LocalNewsViewController: UIViewController, UITableViewDelegate {
+    private let cellId = "localArticleCell"
+    private let toCreateOrEditVCSegueId = "toCreateOrEditVC"
     
     private let disposeBag = DisposeBag()
     
     @IBOutlet weak var tableView: UITableView!
     
-    private let viewModel = NewsViewModel(newsRepository: networkRepository)
+    private let viewModel = NewsViewModel(newsRepository: localRepository)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,23 +67,9 @@ class LatestNewsViewController: UIViewController, UITableViewDelegate {
             .articles
             .bind(to: tableView
                     .rx
-                    .items(cellIdentifier: cellId, cellType: ArticleCell.self)) { (_, article, cell) in
+                    .items(cellIdentifier: cellId, cellType: LocalArticleCell.self)) { (_, article, cell) in
                 cell.article = article
             }
-            .disposed(by: disposeBag)
-        
-        // handle item selected
-        tableView
-            .rx
-            .modelSelected(Article.self)
-            .subscribe(onNext: { [unowned self] article in
-                if let articleUrl = article.url,
-                   let url = URL(string: articleUrl) {
-                    let sfSafariVC = SFSafariViewController(url: url)
-                    
-                    self.present(sfSafariVC, animated: true)
-                }
-            })
             .disposed(by: disposeBag)
         
         // set tableview delegate
@@ -115,14 +99,52 @@ class LatestNewsViewController: UIViewController, UITableViewDelegate {
             .disposed(by: disposeBag)
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-    
-        // load next page when the user scroll to bottom
-        if offsetY > contentHeight - scrollView.frame.height {
-            self.loadArticles(fromScratch: false)
+    func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // Archive action
+        let editAction = UIContextualAction(style: .normal,
+                                            title: "Edit") { [unowned self] (_, _, completionHandler) in
+            let article = self.viewModel.articles.value[indexPath.row]
+            self.performSegue(withIdentifier: self.toCreateOrEditVCSegueId, sender: article)
+            
+            completionHandler(true)
         }
+        
+        editAction.backgroundColor = .systemBlue
+        
+        // Trash action
+        let deleteAction = UIContextualAction(style: .destructive,
+                                              title: "Delete") {  [unowned self] (_, _, completionHandler) in
+            let article = self.viewModel.articles.value[indexPath.row]
+            self.viewModel.delete(article: article)
+            self.loadArticles(fromScratch: true)
+
+            completionHandler(true)
+        }
+        
+        deleteAction.backgroundColor = .systemRed
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+        
+        return configuration
     }
     
+    @IBAction func newPostTapped(_ sender: Any) {
+        performSegue(withIdentifier: toCreateOrEditVCSegueId, sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == toCreateOrEditVCSegueId,
+           let navVC = segue.destination as? UINavigationController,
+           let vc = navVC.topViewController as? CreateOrEditPostViewController {
+            vc.delegate = self
+            vc.article = sender as? Article
+        }
+    }
+}
+
+extension LocalNewsViewController: CreateOrEditPostViewControllerDelegate {
+    func postsUpdated() {
+        loadArticles(fromScratch: true)
+    }
 }

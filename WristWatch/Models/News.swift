@@ -4,6 +4,7 @@
 //   let news = try? newJSONDecoder().decode(News.self, from: jsonData)
 
 import Foundation
+import RealmSwift
 
 // MARK: - News
 struct News: Codable {
@@ -13,26 +14,35 @@ struct News: Codable {
 }
 
 // MARK: - Article
-struct Article: Codable {
-    let source: Source
-    let author: String?
-    let title, articleDescription: String
-    let url: String
-    let urlToImage: String?
-    let publishedAt: Date
-    let content: String
+class Article: Object, Codable {
+    @objc dynamic var id: String?
+    @objc dynamic var title: String?
+    @objc dynamic var content: String?
+    
+    var author: String?
 
+    var publishedAt: Date?
+    var urlToImage: String?
+
+    var source: Source?
+    var articleDescription: String?
+    var url: String?
+    
     enum CodingKeys: String, CodingKey {
         case source, author, title
         case articleDescription = "description"
         case url, urlToImage, content, publishedAt 
     }
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
 }
 
 // MARK: - Source
-struct Source: Codable {
+class Source: Codable {
     let id: String?
-    let name: String
+    let name: String?
 }
 
 // MARK: - News

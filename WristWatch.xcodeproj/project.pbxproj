@@ -10,6 +10,10 @@
 		0A3BC2062614203D00DFA860 /* AlertUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3BC2052614203D00DFA860 /* AlertUtils.swift */; };
 		0A3BC20C2614451F00DFA860 /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3BC20B2614451F00DFA860 /* ArticleCell.swift */; };
 		0A3BC2152614461400DFA860 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 0A3BC2142614461400DFA860 /* Kingfisher */; };
+		0A86C5272614CB8C006DC472 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 0A86C5262614CB8C006DC472 /* Realm */; };
+		0A86C5292614CB8C006DC472 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0A86C5282614CB8C006DC472 /* RealmSwift */; };
+		0A86C52E2614F7CD006DC472 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A86C52D2614F7CD006DC472 /* Database.swift */; };
+		0A86C5362614FBA7006DC472 /* RealmResult+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A86C5352614FBA7006DC472 /* RealmResult+Extension.swift */; };
 		0AC4A1D52612DC7300DA0EA7 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC4A1D42612DC7300DA0EA7 /* News.swift */; };
 		0AC4A1E12612E01200DA0EA7 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC4A1E02612E01200DA0EA7 /* Repository.swift */; };
 		0AC4A1E62612E5CA00DA0EA7 /* NewsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC4A1E52612E5CA00DA0EA7 /* NewsAPIClient.swift */; };
@@ -49,6 +53,9 @@
 		0ACCF9162612902200B971AB /* PlayfairDisplay-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0ACCF8FF2612902200B971AB /* PlayfairDisplay-SemiBold.ttf */; };
 		0ACCF9172612902200B971AB /* PlayfairDisplay-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0ACCF9002612902200B971AB /* PlayfairDisplay-BlackItalic.ttf */; };
 		0ACCF9182612902200B971AB /* PlayfairDisplay-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0ACCF9002612902200B971AB /* PlayfairDisplay-BlackItalic.ttf */; };
+		0AE46670261585120010B594 /* CreateOrEditPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE4666F261585120010B594 /* CreateOrEditPostViewController.swift */; };
+		0AE4804526152F6D009D5356 /* LocalArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE4804426152F6D009D5356 /* LocalArticleCell.swift */; };
+		0AE4804B26153199009D5356 /* LocalNewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE4804A26153199009D5356 /* LocalNewsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +78,8 @@
 /* Begin PBXFileReference section */
 		0A3BC2052614203D00DFA860 /* AlertUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUtils.swift; sourceTree = "<group>"; };
 		0A3BC20B2614451F00DFA860 /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
+		0A86C52D2614F7CD006DC472 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		0A86C5352614FBA7006DC472 /* RealmResult+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RealmResult+Extension.swift"; sourceTree = "<group>"; };
 		0AC4A1D42612DC7300DA0EA7 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		0AC4A1E02612E01200DA0EA7 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		0AC4A1E52612E5CA00DA0EA7 /* NewsAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAPIClient.swift; sourceTree = "<group>"; };
@@ -102,6 +111,9 @@
 		0ACCF8FE2612902100B971AB /* PlayfairDisplay-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-MediumItalic.ttf"; sourceTree = "<group>"; };
 		0ACCF8FF2612902200B971AB /* PlayfairDisplay-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-SemiBold.ttf"; sourceTree = "<group>"; };
 		0ACCF9002612902200B971AB /* PlayfairDisplay-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PlayfairDisplay-BlackItalic.ttf"; sourceTree = "<group>"; };
+		0AE4666F261585120010B594 /* CreateOrEditPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrEditPostViewController.swift; sourceTree = "<group>"; };
+		0AE4804426152F6D009D5356 /* LocalArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalArticleCell.swift; sourceTree = "<group>"; };
+		0AE4804A26153199009D5356 /* LocalNewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNewsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +123,8 @@
 			files = (
 				0A3BC2152614461400DFA860 /* Kingfisher in Frameworks */,
 				0AC4A2022613BD4700DA0EA7 /* RxSwift in Frameworks */,
+				0A86C5272614CB8C006DC472 /* Realm in Frameworks */,
+				0A86C5292614CB8C006DC472 /* RealmSwift in Frameworks */,
 				0AC4A2002613BD4700DA0EA7 /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				0A3BC20B2614451F00DFA860 /* ArticleCell.swift */,
+				0AE4804426152F6D009D5356 /* LocalArticleCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -162,6 +177,7 @@
 			children = (
 				0AC4A1E02612E01200DA0EA7 /* Repository.swift */,
 				0AC4A1E52612E5CA00DA0EA7 /* NewsAPIClient.swift */,
+				0A86C52D2614F7CD006DC472 /* Database.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -169,6 +185,7 @@
 		0AC4A1F22612FBE900DA0EA7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0A86C5352614FBA7006DC472 /* RealmResult+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -177,7 +194,6 @@
 			isa = PBXGroup;
 			children = (
 				0ACCF8BE26126E7500B971AB /* LatestNewsViewController.swift */,
-				0AC4A2092613C0B300DA0EA7 /* LatestNewsViewModel.swift */,
 			);
 			path = "Latest News";
 			sourceTree = "<group>";
@@ -207,11 +223,14 @@
 			children = (
 				0ACCF8BA26126E7500B971AB /* AppDelegate.swift */,
 				0ACCF8BC26126E7500B971AB /* SceneDelegate.swift */,
+				0AE4666E261584D90010B594 /* Create or Edit Post */,
+				0AE4804926153181009D5356 /* Local News */,
 				0AC4A20E2613C0BA00DA0EA7 /* Latest News */,
 				0ACCF8C026126E7500B971AB /* Main.storyboard */,
 				0ACCF8C326126E7600B971AB /* Assets.xcassets */,
 				0ACCF8C526126E7600B971AB /* LaunchScreen.storyboard */,
 				0ACCF8C826126E7600B971AB /* Info.plist */,
+				0AC4A2092613C0B300DA0EA7 /* LatestNewsViewModel.swift */,
 				0A3BC20A2614450D00DFA860 /* Views */,
 				0AC4A1F22612FBE900DA0EA7 /* Extensions */,
 				0AC4A1DF2612DFFC00DA0EA7 /* Repository */,
@@ -259,6 +278,22 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		0AE4666E261584D90010B594 /* Create or Edit Post */ = {
+			isa = PBXGroup;
+			children = (
+				0AE4666F261585120010B594 /* CreateOrEditPostViewController.swift */,
+			);
+			path = "Create or Edit Post";
+			sourceTree = "<group>";
+		};
+		0AE4804926153181009D5356 /* Local News */ = {
+			isa = PBXGroup;
+			children = (
+				0AE4804A26153199009D5356 /* LocalNewsViewController.swift */,
+			);
+			path = "Local News";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -280,6 +315,8 @@
 				0AC4A1FF2613BD4700DA0EA7 /* RxCocoa */,
 				0AC4A2012613BD4700DA0EA7 /* RxSwift */,
 				0A3BC2142614461400DFA860 /* Kingfisher */,
+				0A86C5262614CB8C006DC472 /* Realm */,
+				0A86C5282614CB8C006DC472 /* RealmSwift */,
 			);
 			productName = WristWatch;
 			productReference = 0ACCF8B726126E7500B971AB /* WristWatch.app */;
@@ -355,6 +392,7 @@
 			packageReferences = (
 				0AC4A1FE2613BD4700DA0EA7 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				0A3BC2132614461400DFA860 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				0A86C5252614CB8C006DC472 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = 0ACCF8B826126E7500B971AB /* Products */;
 			projectDirPath = "";
@@ -445,6 +483,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AC4A1D52612DC7300DA0EA7 /* News.swift in Sources */,
+				0AE46670261585120010B594 /* CreateOrEditPostViewController.swift in Sources */,
 				0ACCF8BF26126E7500B971AB /* LatestNewsViewController.swift in Sources */,
 				0AC4A20A2613C0B300DA0EA7 /* LatestNewsViewModel.swift in Sources */,
 				0AC4A1E12612E01200DA0EA7 /* Repository.swift in Sources */,
@@ -453,7 +492,11 @@
 				0ACCF8BD26126E7500B971AB /* SceneDelegate.swift in Sources */,
 				0AC4A1E62612E5CA00DA0EA7 /* NewsAPIClient.swift in Sources */,
 				0A3BC20C2614451F00DFA860 /* ArticleCell.swift in Sources */,
+				0AE4804B26153199009D5356 /* LocalNewsViewController.swift in Sources */,
+				0A86C52E2614F7CD006DC472 /* Database.swift in Sources */,
+				0A86C5362614FBA7006DC472 /* RealmResult+Extension.swift in Sources */,
 				0AC4A1EB2612E62900DA0EA7 /* AppError.swift in Sources */,
+				0AE4804526152F6D009D5356 /* LocalArticleCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -798,6 +841,14 @@
 				minimumVersion = 6.2.1;
 			};
 		};
+		0A86C5252614CB8C006DC472 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.7.2;
+			};
+		};
 		0AC4A1FE2613BD4700DA0EA7 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
@@ -813,6 +864,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0A3BC2132614461400DFA860 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		0A86C5262614CB8C006DC472 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A86C5252614CB8C006DC472 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		0A86C5282614CB8C006DC472 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A86C5252614CB8C006DC472 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
 		};
 		0AC4A1FF2613BD4700DA0EA7 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
