@@ -9,38 +9,75 @@ import XCTest
 @testable import WristWatch
 
 class WristWatchTests: XCTestCase {
-
+    var database: Database!
+    var repository: NewsRepository!
+    
+    override class func setUp() {
+        
+    }
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        database = InMemoryDatabase()
+        repository = LocalRepository(database: database)
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        database = nil
+        repository = nil
     }
 
-    func testApi() throws {
-        let expectation = XCTestExpectation(description: "test api")
-
-        let apiClient = NewsAPIClientImpl(baseURL: "https://newsapi.org",
-                                          apiKey: "e2c0bd1a7ce94d39beb67a8e0a086897",
-                                          version: "v2")
-
-        apiClient.everything(keyword: "watches price") { result in
-            
+    func testRepositoryAddElement() {
+        let newElement = Article()
+        newElement.id = UUID().uuidString
+        newElement.title = "Test title"
+        newElement.content = "Test content"
+        
+        try? repository.createOrUpdate(article: newElement)
+        
+        let expectation = XCTestExpectation(description: "query")
+        var countAfter = -1
+        
+        repository.read(keyword: "", page: 1, pageSize: 100) { result in
             switch result {
-            case .failure(let error):
-                print(error)
-                XCTFail()
-                
-            case .success(let news):
-                print(news)
-                
+            case .success(let articles):
+                countAfter = articles.count
+            case .failure:
+                XCTFail("Cannot read database")
             }
             
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 10)
+        wait(for: [expectation], timeout: 2)
+        
+        XCTAssert(countAfter == 1)
     }
-
+    
+    func testRepositoryDeleteElement() {
+        let newElement = Article()
+        newElement.id = UUID().uuidString
+        newElement.title = "Test title"
+        newElement.content = "Test content"
+        
+        try? repository.createOrUpdate(article: newElement)
+        try? repository.delete(article: newElement)
+        
+        let expectation = XCTestExpectation(description: "query")
+        var countAfter = -1
+        
+        repository.read(keyword: "", page: 1, pageSize: 100) { result in
+            switch result {
+            case .success(let articles):
+                countAfter = articles.count
+            case .failure:
+                XCTFail("Cannot read database")
+            }
+            
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 2)
+        
+        XCTAssert(countAfter == 0)
+    }
 }

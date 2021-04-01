@@ -65,3 +65,23 @@ class RealmDatabase: Database {
         }
     }
 }
+
+class InMemoryDatabase: Database {
+    var articles: [Article]
+    
+    init() {
+        articles = []
+    }
+    
+    func createOrUpdate(article: Article) throws {
+        articles.append(article) // not updating
+    }
+    
+    func query(keyword: String?, page: Int, pageSize: Int) throws -> [Article] {
+        return articles
+    }
+    
+    func delete(article: Article) throws {
+        articles.removeAll { $0.id == article.id }
+    }
+}
